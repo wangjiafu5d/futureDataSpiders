@@ -1,1 +1,2 @@
-# futureDataSpiders
+# futureDataSpiders 使用phantomjs.exe做浏览器，selenium操作解析浏览器获取最终html，Jsoup处理html获取到DOM，在得到需要的数据元素。 依赖windows7操作系统，phantom2.1.1.exe,selenium 2.44.0的一系列jar包，除了将phantomjsDriver 1.1.0.jar替换成1.3.0.jar，Jsoup 1.8.1.jar。
+# 也可只通过JS脚本和phantomjs.exe的调用获取到最终html文件
