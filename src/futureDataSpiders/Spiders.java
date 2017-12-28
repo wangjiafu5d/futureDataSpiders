@@ -22,8 +22,17 @@ public class Spiders {
 
 		for (int m = 12; m > 0; m--) {
 			int monthDays = getMaxDayByYearMonth(2017, m);
-			for (int j = 0; j < monthDays; j++) {
-				String date = "2017-" + m + "-" + (monthDays - j);
+			for (int j = monthDays; j > 0; j--) {
+				String date = "";
+				String month = "0" + m;
+				String day = "0" + j;
+				if (m > 9) {
+					month = "" + m;
+				}
+				if (j > 9) {
+					day = "" + j;
+				}
+				date = 2017 + "-" + month + "-" + day;
 				String url = "http://www.100ppi.com/sf/day-" + date + ".html";
 				// String exec = path+"phantomjs.exe "+path+"code.js " + url;
 				driver.get(url);
@@ -38,13 +47,17 @@ public class Spiders {
 					String s = trs.get(i).text();
 					if (isChinese(s.charAt(0)) && s.length() > 25) {
 						String fileName = s.split(" ")[0];
-						String filePath = "C:\\Users\\chuan\\desktop\\futureData\\" + fileName + ".txt";
+						String filePath = "C:\\Users\\chuan\\desktop\\futureData\\" + fileName + ".xlsx";
 						File dataFile = new File(filePath);
 						if (!dataFile.exists()) {
 							dataFile.createNewFile();
 						}
 						FileOutputStream fos = new FileOutputStream(filePath, true);
-						fos.write((s + " " + date).getBytes());
+						String[] ele = s.split(" ");
+						for (String string : ele) {
+							fos.write((string + "\t").getBytes());
+						}
+						fos.write(date.getBytes());
 						fos.write("\r\n".getBytes());
 						fos.flush();
 						fos.close();
